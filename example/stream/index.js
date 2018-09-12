@@ -5,19 +5,20 @@ const fs = require('fs')
 const readStream = fs.createReadStream(path.resolve(__dirname, '../../README.md'), { highWaterMark: 1 })
 // const writeStream = fs.createWriteStream(path.resolve(__dirname, '../../test.md'))
 // const readable = new stream.Readable()
-// readStream.on('readable', () => {
-//   console.log(`readable: ${readStream.read()}`)
-// })
+readStream.on('readable', () => {
+  console.log(`readable: ${readStream.read()}`)
+})
 
 readStream.setEncoding('utf-8')
-readStream.on('data', chunk => {
-  console.log(chunk)
-})
+// readStream.on('data', chunk => {
+//   console.log(readStream.read())
+//   console.log(chunk)
+// })
 readStream.on('end', () => {
   console.log('end')
 })
-readStream.pause()
-console.log(readStream.isPaused())
+// readStream.pause()
+// console.log(readStream.isPaused())
 
 // const { PassThrough, Writable } = require('stream')
 // const pass = new PassThrough()

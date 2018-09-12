@@ -1,4 +1,4 @@
-## 1 前言
+## 1. 前言
 当我尝试去看process.stdin和process.stdout的概念时，发现它是基于stream的，似乎node中很多都是基于此的。
 
 stream是什么呢？是处理系统缓存的一种方式，在node中，处理缓存有2种方式：
@@ -53,7 +53,7 @@ node中部署了Stream接口的如下：
 - tcp连接
 - 标准的输入输出
 
-## 2 Stream分类
+## 2. Stream分类
 
 有4种stream类型
 
@@ -152,18 +152,19 @@ ReadStream {
 - readable 在流的状态有更新时触发，当到达数据流尾部时，也会触发，此时表示没有数据可读
   ```js
   readStream.on('readable', () => {
-    console.log(`readable: ${readStream.read()}`)
+    console.log(`readable: ${readStream.read()}`)   // null
   })
 
   readStream.on('data', chunk => {
-    console.log(chunk)
+    console.log(chunk)  // value
   })
   readStream.push(new Buffer('a'))
   readStream.on('end', () => {
-    console.log('end')
+    console.log('end')  // end
   })
   ```
-  打印如下，`readStream.read()`始终为null？
+  打印如下，`readStream.read()`始终为null，是因为`readable`和`data`事件的作用一致，但`data`先触发，已经将缓冲区的数据读取出来，那之后在`read`，肯定就没有数据了。
+  一般来说，应避免使用`readable`事件和`readable.read()`方法，使用`readable.pipe()`或`data`事件代替。
   ```
   <Buffer 61>
   readable: null
@@ -215,6 +216,12 @@ ReadStream {
 - paused()
 - isPaused()
 - resume()  表示继续开始消费数据
+  ```
+  new stream.Readable()
+  .resume()
+  .on('end', () => {})
+  ```
+  他们之间的相互作用
     ```js
     const readable = new stream.Readable()
 
@@ -224,4 +231,7 @@ ReadStream {
     readable.resume()
     readable.isPaused() // === false
     ```
+----
+
+### 2.2 可写流
 
