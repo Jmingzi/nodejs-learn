@@ -293,8 +293,26 @@ server.listen(8088)
 // 错误: Unexpected token o in JSON at position 1
 ```
 
+### 2.3 读写流
 
+读写流为`stream.Duplex`和`stream.Transform`
 
-## 总结
+读写流内部都有自己的实现方法
+- writable._write(chunk, encoding, callback)
+- reabable._read(size)
 
-node中的2个核心Stream和EventMitter，几乎所有的类都继承了它们。
+但是Transform有额外的转换方法，为了将输入和输出的数据关联起来
+
+- Transform._transform(chunk, encoding, callback)
+- Transform._flush(callback)
+
+对于可读写流在实际例子中的作用与实现还有待验证。
+
+> node中的2个核心Stream和EventEmitter，几乎所有的类都继承了它们。
+
+参考：
+
+- [理解 Node.js Stream 模块](https://zhangxiang958.github.io/2018/09/01/%E7%90%86%E8%A7%A3%20Node.js%20Stream%20%E6%A8%A1%E5%9D%97/#more)
+- [Stream](http://nodejs.cn/api/stream.html#stream_stream)
+- [模块/stream.md](https://github.com/chyingp/nodejs-learning-guide/blob/master/%E6%A8%A1%E5%9D%97/stream.md)
+- [Node.js 中流操作实践](https://juejin.im/post/5b950c4ae51d450e7f52c634?utm_source=gold_browser_extension)
