@@ -1,0 +1,23 @@
+{
+  "name": "nodejs-learn",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "node example/stream/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jmingzi/nodejs-learn.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jmingzi/nodejs-learn/issues"
+  },
+  "homepage": "https://github.com/Jmingzi/nodejs-learn#readme"
+}
