@@ -7,7 +7,7 @@
     "example": "example"
   },
   "scripts": {
-    "test": "node example/stream/index.js"
+    "test": "node example/stream/writable.js"
   },
   "repository": {
     "type": "git",

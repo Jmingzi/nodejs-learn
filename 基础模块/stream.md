@@ -235,3 +235,66 @@ ReadStream {
 
 ### 2.2 可写流
 
+同理，可写流可以想象成数据的消费者。
+
+可写流的`EventEmitter`事件
+- pipe 监听可读流pipe事件触发时触发
+- drain 在`writable.write(chunk)`返回false时，会触发
+- unpipe
+- error
+- close
+- finish
+
+可写流的方法
+- writable.write()
+- writable.end()
+- writable.destroy()
+- writable.setDefaultEncoding()
+
+例如创建http服务器
+```js
+const http = require('http')
+
+const server = http.createServer((req, res) => {
+  // request为客户端请求对象 http.IncomingMessagede 实例
+  // response为服务端响应数据 http.ServerResponse 实例
+  let body = ''
+
+  // req为可读流，可以设置编码
+  // res为可写流
+  req.setEncoding('utf8')
+  // 转换为flowing模式
+  req.on('data', chunk => {
+    body += chunk // 这里的chunk为字符串，不存在自动转码的问题
+  })
+
+  // 可读流的end事件
+  req.on('end', () => {
+    try {
+      const data = JSON.parse(body)
+      // writable.write()
+      res.write(typeof data)
+      // writable.end()
+      res.end()
+    } catch (er) {
+      res.statusCode = 400
+      return res.end(`错误: ${er.message}`)
+    }
+  })
+})
+
+server.listen(8088)
+
+// $ curl localhost:8088 -d "{}"
+// object
+// $ curl localhost:8088 -d "\"foo\""
+// string
+// $ curl localhost:8088 -d "not json"
+// 错误: Unexpected token o in JSON at position 1
+```
+
+
+
+## 总结
+
+node中的2个核心Stream和EventMitter，几乎所有的类都继承了它们。
