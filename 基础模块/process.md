@@ -114,6 +114,22 @@ process.env
 
 ### 2.1 process的方法
 
+- process.kill(pid, signal)
 
+process.kill()方法将signal发送给pid标识的进程，signal默认为`'SIGTERM'`
 
+signal event如下
+```
+SIGHUP 默认的绑定行为是结束Node.js，但是一旦给它绑定了新的监听器，默认行为会被移除。
+SIGINT `<Ctrl>+C`触发
+SIGTERM 在非windows平台绑定了默认的监听器，这样进程以代码128 + signal number结束之前，可以重置终端模式。  如果这两个事件任意一个绑定了新的监听器，原有默认的行为会被移除(Node.js不会结束)。
+```
+详细请戳[信号事件](http://nodejs.cn/api/process.html#process_signal_events)
 
+- process.exit([code])
+
+以结束状态码code指示Node.js同步终止进程。 如果code未提供，此exit方法要么使用'success' 状态码 0，要么使用process.exitCode属性值，前提是此属性已被设置。 Node.js在所有'exit'事件监听器都被调用了以后，才会终止进程。
+
+**注意点**
+
+应该避免显示的调用`process.exit()`，因为会丢弃异步操作，进程一般会自然结束，我们只需要设置`process.exitCode`来告诉系统以哪种code结束进程即可。
