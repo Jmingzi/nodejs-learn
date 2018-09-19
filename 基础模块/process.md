@@ -112,9 +112,11 @@ process.env
 
 新增`process.env.test`，删除`delete process.env.test`
 
-### 2.1 process的方法
+----
 
-- process.kill(pid, signal)
+### 2.2 process的方法
+
+#### 2.2.1 process.kill(pid, signal)
 
 process.kill()方法将signal发送给pid标识的进程，signal默认为`'SIGTERM'`
 
@@ -126,10 +128,90 @@ SIGTERM 在非windows平台绑定了默认的监听器，这样进程以代码12
 ```
 详细请戳[信号事件](http://nodejs.cn/api/process.html#process_signal_events)
 
-- process.exit([code])
+#### 2.2.2 process.exit([code])
 
 以结束状态码code指示Node.js同步终止进程。 如果code未提供，此exit方法要么使用'success' 状态码 0，要么使用process.exitCode属性值，前提是此属性已被设置。 Node.js在所有'exit'事件监听器都被调用了以后，才会终止进程。
 
 **注意点**
 
 应该避免显示的调用`process.exit()`，因为会丢弃异步操作，进程一般会自然结束，我们只需要设置`process.exitCode`来告诉系统以哪种code结束进程即可。
+
+进程的退出码
+
+- 0，正常退出
+- 1，发生未捕获错误
+- 5，V8执行错误
+- 8，不正确的参数
+- 128 + 信号值，如果Node接受到退出信号（比如SIGKILL或SIGHUP），它的退出码就是128加上信号值。由于128的二进制形式是10000000, 所以退出码的后七位就是信号值。
+
+#### 2.2.3 process.chdir(directory)
+
+变更Node.js进程的当前工作目录
+
+当前工作路径即`process.env.PWD`或`process.cwd()`得到
+
+```
+console.log(`Starting directory: ${process.cwd()}`)
+try {
+  process.chdir('../stream')
+  console.log(`New directory: ${process.cwd()}`)
+} catch (err) {
+  console.error(`chdir: ${err}`)
+}
+```
+
+#### 2.2.4 process.emitWarning(warning[, type[, code]][, ctor])
+
+用于发出定制的或应用特定的进程警告，参数：
+
+- warning <string> | <Error> 发出的警告。
+- type <string> 如果 warning 是String, type 是警告类型的名字。 默认值: Warning。
+- code <string> 当前警告的唯一标识符。
+- ctor <Function> 如果warning是String，ctor是可选的function，用于限制生成的堆栈信息。默认process.emitWarning
+
+warning可以理解为是一个Error对象，包含`name` `message` `code` `stack`
+
+----
+
+### 2.3 process的事件
+
+#### 2.3.1 'exit'
+
+'exit' 事件监听器的回调函数只允许同步操作，因为异步操作会被丢弃，因为非本次事件循环的事件都不在执行
+
+```
+process.on('exit', code => {
+  setTimeout(() => {
+    console.log('该函数不会被执行')
+  }, 0)
+})
+```
+
+#### 2.3.2 'warning'
+
+任何时候Node.js发出进程告警，都会触发'warning'事件
+
+```js
+process.on('warning', (warning) => {
+  console.warn(warning.name);    // 打印告警名称
+  console.warn(warning.message); // 打印告警信息
+  console.warn(warning.stack);   // 打印堆栈信息
+});
+```
+
+可以配合`process.emitWarning()`使用
+
+----
+
+### 2.4 IPC相关
+
+- process.connected
+- process.channel
+- process.disconnect()
+- 'message' 事件
+- 'disconnect' 事件
+
+具体请戳[创建进程child_process](child_process.md)
+
+
+

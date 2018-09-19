@@ -35,12 +35,20 @@
 //   console.log('exit')
 // })
 
-process.on('SIGHUP', () => {
-  console.log('Got SIGHUP signal.');
-});
+// process.on('SIGHUP', () => {
+//   console.log('Got SIGHUP signal.');
+// });
+//
+// console.log('hello');
+//
+// process.kill(process.pid, 'SIGHUP');
+//
+// console.log('world');
 
-console.log('hello');
-
-process.kill(process.pid, 'SIGHUP');
-
-console.log('world');
+console.log(`Starting directory: ${process.cwd()}`);
+try {
+  process.chdir('../stream');
+  console.log(`New directory: ${process.cwd()}`);
+} catch (err) {
+  console.error(`chdir: ${err}`);
+}
