@@ -75,7 +75,44 @@ process.stdin.on('end', () => {
 })
 ```
 
+- process.stdout 同理，它的返回连接到`fd 1`的流，除非 fd 1 指向一个文件，在这种情况下它是一个可写流。
 
+```js
+fs.createReadStream('index.js').pipe(process.stdout)
+```
+
+- process.stderr 文件描述符为2，除非 fd 2指向一个文件，在这种情况下它是一个可写流
+
+process.stdout and process.stderr 与 Node.js 中其他 streams 在重要的方面有不同:
+
+- 他们分别使用内部的 console.log() 和 console.error()。
+
+- 他们不能被关闭 (调用end()将会抛出异常)。
+
+- 他们永远不会触发 'finish' 事件。
+
+#### 2.1.3 环境变量
+
+就和普通的对象一样
+```
+process.env
+
+{
+  PWD: '/Users/yangming/Documents/github/nodejs-learn/example/process',
+  OLDPWD: '/Users/yangming/Documents/github/nodejs-learn/example',
+  rvm_prefix: '/Users/yangming',
+  rvm_path: '/Users/yangming/.rvm',
+  rvm_bin_path: '/Users/yangming/.rvm/bin',
+  _system_type: 'Darwin',
+  _system_name: 'OSX',
+  _system_version: '10.13',
+  _system_arch: 'x86_64',
+}
+```
+
+新增`process.env.test`，删除`delete process.env.test`
+
+### 2.1 process的方法
 
 
 
