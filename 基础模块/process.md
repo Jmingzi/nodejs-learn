@@ -150,7 +150,7 @@ SIGTERM 在非windows平台绑定了默认的监听器，这样进程以代码12
 
 当前工作路径即`process.env.PWD`或`process.cwd()`得到
 
-```
+```js
 console.log(`Starting directory: ${process.cwd()}`)
 try {
   process.chdir('../stream')
@@ -179,7 +179,7 @@ warning可以理解为是一个Error对象，包含`name` `message` `code` `stac
 
 'exit' 事件监听器的回调函数只允许同步操作，因为异步操作会被丢弃，因为非本次事件循环的事件都不在执行
 
-```
+```js
 process.on('exit', code => {
   setTimeout(() => {
     console.log('该函数不会被执行')
