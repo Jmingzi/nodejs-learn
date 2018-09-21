@@ -18,7 +18,7 @@ process是全局对象的一个属性，作用一般用来获取node进程相关
     - 当前js文件的路径
     - 其余参数
 
-```
+```js
 console.log('argv: ', process.argv)
 console.log('argv[0]:', process.argv[0])
 console.log('argv0:', process.argv0)
