@@ -1,5 +1,5 @@
 const path = require('path')
-const { exec, execFile } = require('child_process')
+const { exec, execFile, fork } = require('child_process')
 
 // const subProcess = exec('sh index.js', {
 //   shell: '/bin/sh'
@@ -17,12 +17,15 @@ const { exec, execFile } = require('child_process')
 //   console.log('code', code)
 // })
 
-const subProcess = execFile('./.bin', {
-  encoding: 'utf8'
-}, err => {
-  console.log(err)
+// const subProcess = execFile('./.bin', {
+//   encoding: 'utf8'
+// })
+
+const subProcess = fork('./child.js', {
+  silent: true
 })
 
+subProcess.stdout.setEncoding('utf8')
 subProcess.stdout.on('data', chunk => {
-  console.log(chunk)
+  console.log('chunk data: ', chunk)
 })

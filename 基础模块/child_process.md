@@ -79,7 +79,7 @@ console.log('this is node env')
 ```
 
 `execFile`options参数没有shell选项
-```
+```js
 const subProcess = execFile('./.bin', {
   encoding: 'utf8'
 }, err => {
@@ -92,6 +92,51 @@ const subProcess = execFile('./.bin', {
 ```
 chomd +x ./.bin
 ```
+
+### child_process.fork(modulePath[, args][, options])
+`child_process.fork()` 方法是 `child_process.spawn()` 的一个特殊情况，专门用于衍生新的 Node.js 进程。 跟 `child_process.spawn()` 一样返回一个 ChildProcess 对象。 返回的 ChildProcess 会有一个额外的内置的通信通道，它允许消息在父进程和子进程之间来回传递。 详见 subprocess.send()。
+
+- modulePath `<string>` 子进程运行的文件路径
+- args `<array>`
+- options
+    - execPath 用来创建子进程的可执行文件，默认是`/usr/local/bin/node`
+    - execArgv 要传给执行路径的字符参数列表，默认为`process.execArgv`
+    - silent 默认是false，即子进程的stdio从父进程继承。如果是true，则直接pipe向子进程的child.stdin、child.stdout等。
+    - stdio 如果声明了stdio，则会覆盖silent选项的设置。
+
+下面用例子来说明以上参数
+
+```js
+// 例子1，execPath
+const subProcess = fork('./.bin', {
+  execPath: '/bin/sh',
+  silent: true
+})
+
+subProcess.stdout.on('data', chunk => {
+  console.log(chunk)
+})
+```
+
+```js
+// 例子2，silent
+const subProcess = fork('./child.js', {
+  // 表示stdin、 stdout 和 stderr 会被导流到父进程中
+  silent: true
+})
+// 在父进程中定义的标准输出
+subProcess.stdout.setEncoding('utf8')
+subProcess.stdout.on('data', chunk => {
+  console.log('chunk data: ', chunk)
+})
+
+// console.log('chunk data: this is child')
+// 如果设置为silent: false，那么子进程中将不存在subProcess.stdout，输出将在子进程中完成
+```
+
+`stdio`参数在`spawn`方法时说明
+
+
 
 ### ChildProcess类
 
