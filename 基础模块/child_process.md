@@ -1,3 +1,5 @@
+> 以下均未考虑windows
+
 child_process 模块可以衍生出子进程，我们可以用子进程来做一些事情从而不影响主进程。
 
 ## 创建进程的几种方法
@@ -99,7 +101,7 @@ chomd +x ./.bin
 - modulePath `<string>` 子进程运行的文件路径
 - args `<array>`
 - options
-    - execPath 用来创建子进程的可执行文件，默认是`/usr/local/bin/node`
+    - execPath 用来创建子进程的可执行文件，默认是`/usr/local/bin/node`，因为默认是用的父进程的`execPath`
     - execArgv 要传给执行路径的字符参数列表，默认为`process.execArgv`
     - silent 默认是false，即子进程的stdio从父进程继承。如果是true，则直接pipe向子进程的child.stdin、child.stdout等。
     - stdio 如果声明了stdio，则会覆盖silent选项的设置。
@@ -136,20 +138,105 @@ subProcess.stdout.on('data', chunk => {
 
 `stdio`参数在`spawn`方法时说明
 
+### child_process.spawn(command[, args][, options])
 
+上面的三个方法都是基于此的，所以我们可以用这个方法为所欲为了
 
-### ChildProcess类
+- command
+- args `<Array>`
+- options
+    - argv0
+    - stdio
+    - detached
+    - shell `<boolean>` | `<string>` ，默认为false，表示没有shell。设置为true或可执行路径，表示在shell上运行。
 
-ChildProcess的实例用来表示当前创建的子进程，通过以上的方法创建
+#### 1. options.stdio
 
-##### 1. subprocess.connected
+用于配置子进程与父进程之间建立的管道，取值如下：
 
-表明是否仍可以从一个子进程发送和接收消息，调用`subprocess.connected()`设为false，不再发送或接受消息
+- 'pipe' - 等同于 ['pipe', 'pipe', 'pipe'] （默认）
+-  'ignore' - 等同于 ['ignore', 'ignore', 'ignore']
+-  'inherit' - 等同于 [process.stdin, process.stdout, process.stderr] 或 [0,1,2]
 
-##### 2. subprocess.killed
+默认情况下，子进程的 stdin、 stdout 和 stderr 会重定向到 ChildProcess 对象上相应的 subprocess.stdin、 subprocess.stdout 和 subprocess.stderr 流。 这等同于将 options.stdio 设为 ['pipe', 'pipe', 'pipe']。
 
-表明该子进程是否已成功接收到 `subprocess.kill()` 的信号。 该属性不代表子进程是否已被终止
+例子1，验证`stdio: 'inherit'`
 
-##### 3. subprocess.stdio
+依然是`.bin`文件
+```sh
+echo 'sh env from child'
+```
 
+child.js内容
+```js
+const ls = spawn('sh', ['./.bin'], {
+  stdio: 'inherit'
+})
+// 此时管道没有被指向到父进程，所以ls.stdout为空
+// 输出'sh env from child'
+```
 
+例子2，验证`stdio: 'pipe'` 其实也就是默认的
+
+```js
+const ls = spawn('sh', ['./.bin'], {
+  stdio: 'inherit'
+})
+
+ls.stdout.on('data', (data) => {
+  console.log(`stdout: ${data}`)
+})
+// 输出 'stdout: sh env from child'
+```
+
+### 建立IPC
+
+子进程通过`fork()`或`exec()`创建时，父子进程之间会建立IPC通道，此时可以利用`subProcess.send`发送消息到子进程，当子进程是`node`进程时，可以用`'message'`事件接受消息
+
+#### subProcess.send(message[, sendHandle[, options]][, callback])
+
+- message `<object>` 键值对形式的消息，例如`{ name: 'ym' }`
+- sendHandle `<Handle>` 一般用来发送创建server对象
+- options `<Object>`
+- callback `<Function>`
+
+返回`<boolean>`
+
+例子：
+
+```js
+// parent.js
+const { fork } = require('child_process')
+const ls = fork('./child2.js')
+
+ls.on('message', m => {
+  console.log('父进程收到消息', m)
+})
+
+ls.send({ name: 'ym' })
+```
+```js
+// child.js
+process.on('message', m => {
+  console.log('子进程受到消息', m)
+})
+
+process.send({ name: 'cjh' })
+```
+输出
+```
+子进程受到消息 { name: 'ym' }
+父进程收到消息 { name: 'cjh' }
+```
+
+-----
+
+### 同步方法
+
+大部分时候，子进程的创建是异步的。也就是说，它不会阻塞当前的事件循环，这对于性能的提升很有帮助。
+
+当然，有的时候，同步的方式会更方便（阻塞事件循环），比如通过子进程的方式来执行shell脚本时。
+
+- spawnSync()
+- execSync()
+- execFileSync()
