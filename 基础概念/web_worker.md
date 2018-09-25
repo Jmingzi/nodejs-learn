@@ -10,8 +10,9 @@ web Worker会创建线程，和浏览器运行的的其他线程一样，可以�
 跟`ServiceWorker`对象的属性很相似，简要列出几个：
 
 ```js
+worker.terminate() // 主线程主动关闭子线程
 self.caches // 缓存api
-self.close()    // 关闭线程
+self.close()    // 子线程自己关闭
 self.location   // 主线程的location
 self.postMessage()  // 发送消息
 slef.Blob
@@ -122,3 +123,26 @@ worker.postMessage(new Person())
 // }
 ```
 
+## 传输机制带来的问题与解决办法
+
+>主线程与子线程之间也可以交换二进制数据，比如File、Blob、ArrayBuffer等对象，也可以在线程之间发送。但是，用拷贝方式发送二进制数据，会造成性能问题。比如，主线程向子线程发送一个50MB文件，默认情况下浏览器会生成一个原文件的拷贝。为了解决这个问题，JavaScript允许主线程把二进制数据直接转移给子线程，转移后主线程无法再使用这些数据，这是为了防止出现多个线程同时修改数据的问题，这种转移数据的方法，叫做Transferable Objects。
+
+```js
+worker.postMessage(aMessage[, transferList])
+```
+
+transferList
+
+一个可选的Transferable对象的数组，用于传递所有权。如果一个对象的所有权被转移，在发送它的上下文中将变为不可用（中止），并且只有在它被发送到的worker中可用。
+可转移对象是如ArrayBuffer，MessagePort或ImageBitmap的实例对象。transferList数组中不可传入null。
+
+## importScripts
+
+Worker 线程能够访问一个全局函数importScripts()来引入脚本，该函数接受0个或者多个URI作为参数来引入资源
+
+脚本的下载顺序不固定，但执行时会按照传入 importScripts() 中的文件名顺序进行。这个过程是同步完成的；直到所有脚本都下载并运行完毕，importScripts() 才会返回。
+
+
+----
+
+以上参考[MDN Worker](https://developer.mozilla.org/zh-CN/docs/Web/API/Worker)、[【转向Javascript系列】深入理解Web Worker](http://www.alloyteam.com/2015/11/deep-in-web-worker/)
