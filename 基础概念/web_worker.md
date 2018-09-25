@@ -25,6 +25,49 @@ self.onmessage  // 事件接收
 - 共享worker `SharedWorker`，全局对象`SharedWorkerGlobalScope`
 - 服务worker `ServiceWorker`
 
+## Worker构造函数
+
+```js
+new Worker(aURL[, options])
+```
+
+aURL为字符串，必须为同源下的可执行js文件或`Data URL`，什么是`Data URL`？
+
+> Data URLs 由四个部分组成：前缀(data:)、指示数据类型的MIME类型、如果非文本则为可选的base64标记、数据本身：
+
+```js
+data:[<mediatype>][;base64],<data>
+```
+
+完整示例：
+
+```js
+const sub = function(e) {
+    console.log(`i am from data urls, ${e.data}`)
+}
+const url = encodeURIComponent(`onmessage=${sub.toString()}`)
+
+const worker = new Worker(`data:text/javascript;charset=US-ASCII,${url}`)
+worker.postMessage('hi')
+// 输出 i am from data urls, hi
+```
+
+我们可以利用`URL.createObjectURL`来创建Data urls，它接受一个Blob对象或者File对象
+
+```js
+const sub = function(e) {
+    console.log(`i am from data urls, ${e.data}`)
+}
+const url = `onmessage=${sub.toString()}`
+const blob = new Blob([url], { type: 'text/javascript' })
+const worker = new Worker(URL.createObjectURL(blob))
+worker.postMessage('hi')
+URL.revokeObjectURL(url) // 释放已经存在的 URL 对象
+// 输出 i am from data urls, hi
+```
+
+详细请见[data_URIs](https://developer.mozilla.org/zh-CN/docs/Web/HTTP/data_URIs)、[Blob](https://developer.mozilla.org/zh-CN/docs/Web/API/Blob)、[URL](https://developer.mozilla.org/zh-CN/docs/Web/API/URL)
+
 ## worker中数据的接收与发送
 
 > 在主页面与 worker 之间传递的数据是通过拷贝，而不是共享来完成的。传递给 worker 的对象需要经过序列化，接下来在另一端还需要反序列化。页面与 worker 不会共享同一个实例，最终的结果就是在每次通信结束时生成了数据的一个副本。大部分浏览器使用结构化拷贝来实现该特性。
@@ -58,7 +101,7 @@ Set|
 
 详细请见[MDN](https://developer.mozilla.org/zh-CN/docs/Web/Guide/API/DOM/The_structured_clone_algorithm)
 
-例子来查看下
+举几个例子来实践下
 
 ```js
 // 1. 传递函数
