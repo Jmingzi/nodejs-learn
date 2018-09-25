@@ -7,7 +7,7 @@ nodejs学习过程记录
 - [js世界里的进程、线程、协程和eventloop](https://github.com/Jmingzi/nodejs-learn/blob/master/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B.md?1536919745275)
 - [js字符集编码](https://iming.work/detail/5b80acd70b61600062edc375)
 - [文件描述符](./基础模块/fd.md)
-- [WebWorker](./基础模块/web_worker.md)
+- [WebWorker](./基础概念/web_worker.md)
 
 [核心模块](https://github.com/Jmingzi/nodejs-learn/tree/master/%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9D%97)
 

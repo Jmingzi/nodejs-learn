@@ -10,20 +10,35 @@
 
 <script language="javascript">
 
-  var worker = new Worker("fibonacci.js");
+  // var worker = new Worker("fibonacci.js");
+  //
+  // worker.onmessage = function(event) {
+  //   document.getElementById("result").textContent = event.data;
+  //   // dump("Got: " + event.data + "\n");
+  // };
+  //
+  // worker.onerror = function(error) {
+  //   // dump("Worker error: " + error.message + "\n");
+  //   throw error;
+  // };
+  //
+  // worker.postMessage("5");
 
-  worker.onmessage = function(event) {
-    document.getElementById("result").textContent = event.data;
-    // dump("Got: " + event.data + "\n");
+  setTimeout(function setTimeout1(){
+    console.log('setTimeout1')
+  }, 0)
+  var channel = new MessageChannel();
+  channel.port1.onmessage = function onmessage1 (){
+    console.log('postMessage')
+    Promise.resolve().then(function promise1 (){
+      console.log('promise1')
+    })
   };
-
-  worker.onerror = function(error) {
-    // dump("Worker error: " + error.message + "\n");
-    throw error;
-  };
-
-  worker.postMessage("5");
-
+  channel.port2.postMessage(0);
+  setTimeout(function setTimeout2(){
+    console.log('setTimeout2')
+  }, 0)
+  console.log('sync')
 </script>
 </body>
 </html>

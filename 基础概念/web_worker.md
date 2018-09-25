@@ -142,6 +142,9 @@ Worker 线程能够访问一个全局函数importScripts()来引入脚本，该�
 
 脚本的下载顺序不固定，但执行时会按照传入 importScripts() 中的文件名顺序进行。这个过程是同步完成的；直到所有脚本都下载并运行完毕，importScripts() 才会返回。
 
+## postMessage与eventloop
+
+postMessage属于`task`或者说`macrotask`
 
 ----
 
