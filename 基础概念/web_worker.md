@@ -1,7 +1,7 @@
 ## 概述
 web Worker会创建线程，和浏览器运行的的其他线程一样，可以与主线程进行数据传输而不影响主线程的运行
 
-在worker运行的脚本内，全局对象不是`window`而是`DedicatedWorkerGlobalScope`，所以我们可以使用全局对象的属性和在
+在worker运行的脚本内，全局对象不是`window`而是`DedicatedWorkerGlobalScope`，所以在worker里我们可以使用全局对象的属性和在主线程里一样。
 
 ## worker的限制
 
