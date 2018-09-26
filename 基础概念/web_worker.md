@@ -144,7 +144,55 @@ Worker 线程能够访问一个全局函数importScripts()来引入脚本，该�
 
 ## postMessage与eventloop
 
-postMessage属于`task`或者说`macrotask`
+postMessage属于`task`或者说`macrotask`，为什么呢？
+
+在eventloop中，先将task队列push到call stack中，在push执行的过程中，步骤为
+
+- 取出一个task运行
+- 运行结束，将`current running task`置为null
+- 移除这个task
+- 执行`microtask checkpoint`任务检查点
+- 有microtask则push到call stack中立即执行
+- 更新渲染UI，`update the rendering`
+
+了解这个顺序后再举个例子
+
+```js
+  setTimeout(function setTimeout1(){
+    console.log('setTimeout1')
+  }, 0)
+  var channel = new MessageChannel();
+  channel.port1.onmessage = function onmessage1 (){
+    console.log('postMessage')
+    Promise.resolve().then(function promise1 (){
+      console.log('promise1')
+    })
+  };
+  channel.port2.postMessage(0);
+  setTimeout(function setTimeout2(){
+    console.log('setTimeout2')
+  }, 0)
+  console.log('sync')
+  // sync
+  // postMessage
+  // promise1
+  // setTimeout1
+  // setTimeout2
+```
+
+我们可以发现是先执行了`postMessage`也就是`task`
+
+![](../images/performance.jpg)
+
+根据执行顺序
+
+- 先将script push到call stack，`Evaluate Script`
+- 执行microtask checkpoint，没有microtask
+- 执行render
+
+重复以上步骤，就是不断的执行eventloop，其中1是`onmessage`task，2是`microtask`的promise，3和4是下一个循环的`timeout`
+
+[从event loop规范探究javaScript异步及浏览器更新渲染时机](https://github.com/aooy/blog/issues/5)
 
 ----
 
