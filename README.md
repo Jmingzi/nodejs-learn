@@ -18,4 +18,7 @@ nodejs系统性的学习过程记录
 - [Process进程](https://github.com/Jmingzi/nodejs-learn/blob/master/%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9D%97/process.md)
 - [child_process子进程](https://github.com/Jmingzi/nodejs-learn/blob/master/%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9D%97/child_process.md)
 - [assert断言](./基础模块/assert.md)
-- [util工具](./基础模块/util.md)
+- [events事件](./基础模块/events.md)(进行中)
+- [net网络](./基础模块/net.md)(进行中)
+- [cluster集群](./基础模块/net.md)(进行中)
+- [util工具](./基础模块/util.md)(进行中)
