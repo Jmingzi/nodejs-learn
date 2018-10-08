@@ -1,8 +1,8 @@
-在ES2015中有四种相等算法
-> [ecma规范定义算法规则](https://tc39.github.io/ecma262/#sec-testing-and-comparison-operations)
-> 7.2.10 SameValue
-> 7.2.11 SameValueZero
-> 7.2.12 SameValueNonNumber
+### 在ES2015中有四种相等算法
+> [ecma规范定义算法规则](https://tc39.github.io/ecma262/#sec-testing-and-comparison-operations)   
+> 7.2.10 SameValue  
+> 7.2.11 SameValueZero  
+> 7.2.12 SameValueNonNumber  
 > 即术语`同值`、`同值零`、`同值非零`
 
 - 抽象相等 `==`
@@ -16,6 +16,8 @@
   - ArrayBuffer构造函数
   - TypedArray构造函数
 - 同值，用于剩余的其他地方
+
+### 定义
 
 `ECMA`中SameValue比较规则
 - 类型不一样，返回false
