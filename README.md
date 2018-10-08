@@ -8,6 +8,7 @@ nodejs系统性的学习过程记录
 - [js字符集编码](https://iming.work/detail/5b80acd70b61600062edc375)
 - [文件描述符](./基础模块/fd.md)
 - [WebWorker](./基础概念/web_worker.md)
+- [js中的等式比较](./基础概念/js中的等式比较.md)
 
 [核心模块](https://github.com/Jmingzi/nodejs-learn/tree/master/%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9D%97)
 
