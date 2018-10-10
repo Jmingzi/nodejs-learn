@@ -1,11 +1,7 @@
-> 关于事件循环，此前分析过2次，也记录过，分别为
-
-> [js世界里的进程、线程、协程和eventloop](https://github.com/Jmingzi/nodejs-learn/blob/master/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B.md?1536919745275)
-
-> [WebWorker与事件循环](./基础概念/web_worker.md)
-
-> 回过头来再看时，发现还是没能真正理解它，于是就有了第三篇[从Node的角度看事件循环](./基础概念/eventloop.md)
-
+> 关于事件循环，此前分析过2次，也记录过，分别为  
+> [js世界里的进程、线程、协程和eventloop](https://github.com/Jmingzi/nodejs-learn/blob/master/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B.md?1536919745275)  
+> [WebWorker与事件循环](./基础概念/web_worker.md)  
+> 回过头来再看时，发现还是没能真正理解它，于是就有了第三篇[从Node的角度看事件循环](./基础概念/eventloop.md)  
 > 每一次的理解都会让我对它有新的认识。
 
 ## 概念
