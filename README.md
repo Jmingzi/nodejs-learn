@@ -7,7 +7,7 @@ nodejs系统性的学习过程记录
 - [js字符集编码](https://iming.work/detail/5b80acd70b61600062edc375)
 - [js世界里的进程、线程、协程和eventloop](https://github.com/Jmingzi/nodejs-learn/blob/master/%E5%9F%BA%E7%A1%80%E6%A6%82%E5%BF%B5/%E8%BF%9B%E7%A8%8B%E5%92%8C%E7%BA%BF%E7%A8%8B.md?1536919745275)
 - [WebWorker与事件循环](./基础概念/web_worker.md)
-- [从Node的角度看事件循环](./基础概念/eventloop.md)
+- [从Node的角度看事件循环](./基础概念/eventloop.md)(进行中)
 - [js中的等式比较](./基础概念/js中的等式比较.md)
 - [文件描述符](./基础模块/fd.md)
 
@@ -19,7 +19,7 @@ nodejs系统性的学习过程记录
 - [Process进程](https://github.com/Jmingzi/nodejs-learn/blob/master/%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9D%97/process.md)
 - [child_process子进程](https://github.com/Jmingzi/nodejs-learn/blob/master/%E5%9F%BA%E7%A1%80%E6%A8%A1%E5%9D%97/child_process.md)
 - [assert断言](./基础模块/assert.md)
-- [events事件](./基础模块/events.md)(进行中)
+- [events事件](./基础模块/events.md)
 - [net网络](./基础模块/net.md)(进行中)
 - [cluster集群](./基础模块/net.md)(进行中)
 - [util工具](./基础模块/util.md)(进行中)
