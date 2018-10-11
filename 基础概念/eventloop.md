@@ -125,3 +125,8 @@ y代表调用栈`call stack`，从上到下代表从一个执行环境到另一�
 - 当当前执行环境被销毁时，会执行当前环境下的microtasks
 - 当调用栈被清空时，开始执行task事件
 
+值得阅读的文档
+
+- [详解JavaScript中的Event Loop（事件循环）机制](https://zhuanlan.zhihu.com/p/33058983)
+- [从Promise来看JavaScript中的Event Loop、Tasks和Microtasks](https://github.com/creeperyang/blog/issues/21)  评论更丰富
+- [从event loop规范探究javaScript异步及浏览器更新渲染时机](https://github.com/aooy/blog/issues/5)  文中描述的先执行task再执行microtask我觉得是错误的
