@@ -38,6 +38,9 @@ Promise.resolve().then(() => {
   console.log('promise')
   channel.port2.postMessage('')
   con2()
+  setTimeout(() => {
+    console.log('timer3')
+  })
 })
 
 con3()
