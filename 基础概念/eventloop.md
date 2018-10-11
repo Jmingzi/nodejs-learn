@@ -89,7 +89,7 @@ y代表调用栈`call stack`，从上到下代表从一个执行环境到另一�
 - tasks: setTimeout, setInterval, UI rendering
 - microtasks: Promise, MutationObserver
 
-严格来讲，`UI rendering`是否属于task有待验证，但它本身是由浏览器的另一个线程去处理的，并且与主线程互相阻塞
+严格来讲，`UI rendering`是否属于task有待验证，但它本身是由浏览器的另一个线程去处理的，并且与主线程互相阻塞。
 
 > 执行环境分为全局执行环境、函数执行环境、eval
 
@@ -115,5 +115,13 @@ y代表调用栈`call stack`，从上到下代表从一个执行环境到另一�
 
 从中我们可以看到render是穿插进行的，唯一可以确定的是render是在`microtasks`执行完成后运行的，因为可以理解为在浏览器的js世界中，主线程外的其它线程的调用，都是需要task去处理的，那必然是在`microtasks`之后了。
 
+### 2.3 总结
 
+一个eventloop的顺序可以理解为这样
+
+- 全局执行环境开始执行代码
+- 遇到新的执行环境则push到调用栈中
+- 在同一个执行环境内遇到microtask就放入同一个microtask事件队列
+- 当当前执行环境被销毁时，会执行当前环境下的microtasks
+- 当调用栈被清空时，开始执行task事件
 
