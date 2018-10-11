@@ -86,10 +86,10 @@ y代表调用栈`call stack`，从上到下代表从一个执行环境到另一�
 
 我还清楚的记得第一次看eventloop相关时，有这样的分类
 
-- tasks: script, setTimeout, setInterval, UI rendering
+- tasks: setTimeout, setInterval, UI rendering
 - microtasks: Promise, MutationObserver
 
-当时就不太理解`script`是什么意思，其实也包括`UI rendering`到底是什么时机去触发的，或者说它的默认机制是什么
+严格来讲，`UI rendering`是否属于task有待验证，但它本身是由浏览器的另一个线程去处理的，并且与主线程互相阻塞
 
 > 执行环境分为全局执行环境、函数执行环境、eval
 
@@ -114,9 +114,6 @@ y代表调用栈`call stack`，从上到下代表从一个执行环境到另一�
 - timer3
 
 从中我们可以看到render是穿插进行的，唯一可以确定的是render是在`microtasks`执行完成后运行的，因为可以理解为在浏览器的js世界中，主线程外的其它线程的调用，都是需要task去处理的，那必然是在`microtasks`之后了。
-
-
-
 
 
 
