@@ -219,4 +219,13 @@ setImmediate在check阶段执行
 
 poll阶段是处理绝大部分events回调的阶段，除了`setImmediate`和`timer`，此外，poll阶段的循环也是有限制的。
 
+值得阅读的文档
+
+- [Node.js的event loop及timer/setImmediate/nextTick](https://github.com/creeperyang/blog/issues/26) 原文及评论很有参考意义
+> 首先I/O callbacks这个阶段，名字有点误导，并不是所有I/O的回调都在这里执行，官网上举的例子是
+  > For example if a TCP socket receives ECONNREFUSED when attempting to connect, some *nix systems want to wait to report the error. This will be queued to execute in the I/O callbacks phase
+> 而fs.readFile的回调是在poll执行的，我的理解是fs.readFile调用了操作系统的API，文件读完之后通过event的方式通知V8，而event的处理是在`poll阶段
+> poll阶段执行两件事情，上面已经说的很清楚了，一是判断哪些timer需要执行回调，一是处理event的回调。node的很多api都是基于事件订阅完成的，比如readStream的data，这些api的回调应该都在poll阶段完成
+
+- [详解JavaScript中的Event Loop（事件循环）机制](https://zhuanlan.zhihu.com/p/33058983)
 
