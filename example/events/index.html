@@ -37,6 +37,7 @@ channel.port1.onmessage = () => {
 Promise.resolve().then(() => {
   console.log('promise')
   channel.port2.postMessage('')
+  // Promise.resolve().then(con2)
   con2()
   setTimeout(() => {
     console.log('timer3')
