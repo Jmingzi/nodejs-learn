@@ -12,6 +12,7 @@ nodejs系统性的学习过程记录
 - [js字符集编码](https://iming.work/detail/5b80acd70b61600062edc375)
 - [js中的等式比较](./基础概念/js中的等式比较.md)
 - [文件描述符](./基础模块/fd.md)
+- [RESTful API的最佳实践](./基础概念/restful_api.md)
 
 [核心模块](./基础模块)
 
