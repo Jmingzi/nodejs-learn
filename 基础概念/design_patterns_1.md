@@ -73,3 +73,50 @@ sub.notify()
 // 我收到了公司面试邀请，公司是 Subject {observers: ObserveList}
 // 我收到了公司面试邀请，公司是 Subject {observers: ObserveList}
 ```
+
+## 发布订阅模式
+
+发布者与订阅者之间是没有关系的，它们彼此都不知道彼此，它们中间由中介去分发事件，它们的唯一关系就是事件名称。一个事件也是对应多个订阅者的。
+
+这个模式更适用于现实的业务逻辑中，因为不存在耦合，更灵活
+
+场景：
+
+> 公司A发布招聘信息岗位M到平台上，N个面试者申请了岗位M并填写了联系方式，公司A的点击按钮通知面试申请者来面试，平台将岗位M的申请者加入到发消息的队列中，按照申请者填写的联系方式发消息。
+
+这里的平台就是中介，也称调度中心。
+
+代码示例：
+
+```js
+class pubSub {
+    constructor() {
+        this.topics = {}
+        this.uid = 0
+    }
+    
+    subscrib(topic, callback) {
+        if (!this.topics[topic]) {
+            this.topics[topic] = []
+        }
+        
+        this.topics[topic].push({
+            id: this.uid + 1,
+            callback
+        })
+    }
+    
+    unsubscribe(uid) {
+        // ...
+    }
+    
+    publish(topic, message) {
+        this.topics[topic].forEach(item => item.callback(message))
+    }
+}
+```
+
+
+
+
+
