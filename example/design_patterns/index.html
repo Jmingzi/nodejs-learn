@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+<script>
+    // 观察者
+    class Observe {
+        update(context) {
+            console.log('我收到了公司面试邀请，公司是', context)
+        }
+    }
+
+    // 用来存放观察者
+    class ObserveList {
+        constructor() {
+            this.observeList = []
+        }
+
+        add(observer) {
+            this.observeList.push(observer)
+        }
+
+        get() {
+            return this.observeList
+        }
+
+        remove(index) {
+        }
+    }
+
+    class Subject {
+        constructor() {
+            this.observers = new ObserveList()
+        }
+
+        addObserver(observer) {
+            this.observers.add(observer)
+        }
+
+        removeObserver(observer) {
+        }
+
+        notify() {
+            const observerList = this.observers.get()
+            observerList.forEach(item => item.update(this))
+        }
+    }
+
+    const sub = new Subject()
+    const ob1 = new Observe()
+    const ob2 = new Observe()
+
+    sub.addObserver(ob1)
+    sub.addObserver(ob2)
+
+    sub.notify()
+</script>
+</body>
+</html>
