@@ -116,6 +116,11 @@ class pubSub {
 }
 ```
 
+延伸阅读
+
+- [设计模式（三）：观察者模式与发布/订阅模式区别](https://www.cnblogs.com/lovesong/p/5272752.html)
+- [观察者模式 vs 发布-订阅模式](https://juejin.im/post/5a14e9edf265da4312808d86)
+- [观察者模式和发布订阅模式有什么不同？](https://www.zhihu.com/question/23486749)
 
 
 
