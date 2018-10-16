@@ -148,7 +148,25 @@ console.log(3)
 - [从Promise来看JavaScript中的Event Loop、Tasks和Microtasks](https://github.com/creeperyang/blog/issues/21)  评论更丰富
 - [从event loop规范探究javaScript异步及浏览器更新渲染时机](https://github.com/aooy/blog/issues/5)  文中描述的先执行task再执行microtask我觉得是错误的
 
-## 3 node中是事件循环模型
+-----
+
+> 2018-10-16更新
+
+在清楚了代码执行顺序后，我们可以这样理解，在不同的执行环境中会分别产生task和microtask  
+
+在同一个执行环境中产生的task会放到相同的tasks queen中，因为栈是后进先出，所以我们看到的task调用顺序也是这样的  
+
+tasks queen在浏览器中有很多，它们之间有一个默认执行顺序机制（浏览器厂商推出的游戏模式？视频模式？），比如Message的postMessage方法，浏览器会将它放入优先级最高的队列中，在microtasks执行完后第一时间就去执行
+
+另外，在每个task执行完后，还会去做checkpoint检查，是否存在microtask，存在就会优先去执行。
+
+而microtask似乎只有一个队列？  
+
+在调用栈执行完成之后，或task执行完之后，就会去执行microtasks queen  
+
+所以，你讲task和microtask谁先谁后有意义吗？
+
+## 3 node中事件循环模型
 
 > 这里也只是对网络的文章查阅总结
 
