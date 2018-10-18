@@ -1,9 +1,8 @@
 const redis = require('redis')
 const bluebird = require('bluebird')
+const client = redis.createClient(811)
 
 bluebird.promisifyAll(redis)
-
-const client = redis.createClient()
 
 client.onAsync('error').then(res => {
     console.log(res)

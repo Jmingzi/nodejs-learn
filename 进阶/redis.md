@@ -4,7 +4,35 @@ redis是基于`BSD协议`的，关于[各种协议的介绍](http://www.runoob.c
 
 redis的操作是原子性的（要么完全成功、要么完全失败）
 
-Redis支持五种数据类型：string（字符串），hash（哈希），list（列表），set（集合）及zset(sorted set：有序集合)。
+redis支持五种数据类型：string（字符串），hash（哈希），list（列表），set（集合）及zset(sorted set：有序集合)。
+
+## node_redis
+
+redis分为redis-server和redis-cli，这里的node_redis仅仅是client，服务还是要自己单独起的，否则你会看到这样的报错
+```
+Unhandled rejection Error: Redis connection to 127.0.0.1:811 failed - connect ECONNREFUSED 127.0.0.1:811
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1163:14)
+```
+
+mac下安装redis
+
+```
+brew install redis
+
+# 启动
+brew services start redis
+
+# 或
+redis-server /usr/local/etc/redis.conf
+
+# 关闭
+redis-cli shutdown
+```
+
+node_redis也继承了`EventEmitter`，所以事件都是以回调的形式，改为`Promise`的话可以借用[bluebird](https://github.com/petkaantonov/bluebird)库
+```js
+bluebird.promisifyAll(redis)
+```
 
 ## redis命令
 
