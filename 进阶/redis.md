@@ -54,8 +54,8 @@ client.onAsync('error').then(err => {
 
 在node_redis命令中，都是原生Redis Command的实现，redis命令的分类
 
-- 对`redis 键`的相关操作
-- 对`string`的相关操作
+- [对`redis 键`的相关操作](#string-commands)
+- [对`string`的相关操作](#string-commands)
 - 对`hash`的相关操作
 - 对`list`的相关操作
 - 对`set`的相关操作
