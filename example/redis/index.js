@@ -1,6 +1,6 @@
 const redis = require('redis')
 const bluebird = require('bluebird')
-const client = redis.createClient(811)
+const client = redis.createClient()
 
 bluebird.promisifyAll(redis)
 

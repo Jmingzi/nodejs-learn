@@ -14,7 +14,7 @@ Unhandled rejection Error: Redis connection to 127.0.0.1:811 failed - connect EC
     at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1163:14)
 ```
 
-mac下安装redis
+mac下操作redis
 
 ```
 brew install redis
@@ -26,6 +26,7 @@ brew services start redis
 redis-server /usr/local/etc/redis.conf
 
 # 关闭
+brew services stop redis
 redis-cli shutdown
 ```
 
@@ -34,7 +35,23 @@ node_redis也继承了`EventEmitter`，所以事件都是以回调的形式，�
 bluebird.promisifyAll(redis)
 ```
 
-## redis命令
+这样你就可以用promise为所欲为了
+
+```js
+client.onAsync('error').then(err => {
+    console.log(err)
+})
+```
+
+## node_redis命令
+
+### hash commands
+
+
+
+-----
+
+## redis原生命令
 
 详细分为
 
