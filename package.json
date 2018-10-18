@@ -7,7 +7,7 @@
     "example": "example"
   },
   "scripts": {
-      "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "test": "node example/stream/writable.js"
   },
   "repository": {
@@ -20,5 +20,9 @@
   "bugs": {
     "url": "https://github.com/Jmingzi/nodejs-learn/issues"
   },
-  "homepage": "https://github.com/Jmingzi/nodejs-learn#readme"
+  "homepage": "https://github.com/Jmingzi/nodejs-learn#readme",
+  "dependencies": {
+    "bluebird": "^3.5.2",
+    "redis": "^2.8.0"
+  }
 }
