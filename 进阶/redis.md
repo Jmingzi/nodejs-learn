@@ -45,7 +45,31 @@ client.onAsync('error').then(err => {
 
 ## node_redis命令
 
+在node_redis命令中，都是原生Redis Command的实现，redis命令的分类
+
+- 对`redis 键`的相关操作
+- 对`string`的相关操作
+- 对`hash`的相关操作
+- 对`list`的相关操作
+- 对`set`的相关操作
+- 对`zset`的相关操作
+
+例如判断一个key是否存在
+
+原生的操作为
+```
+EXISTS key
+```
+node_redis中
+```js
+client.exists('key', callback)
+// promisify后
+client.exists('key').then(console.log)
+```
+
 ### hash commands
+
+Redis hash 是一个string类型的field和value的映射表，hash特别适合用于存储对象。
 
 
 
