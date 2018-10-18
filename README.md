@@ -30,4 +30,4 @@ nodejs系统性的学习过程记录
 
 [进阶](./进阶)
 
-- [redis及node_redis](./进阶/redis.md)(进行中)
+- [redis及node_redis](./进阶/redis.md)
