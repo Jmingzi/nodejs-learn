@@ -1,3 +1,5 @@
+> 本文仅仅对redis及node redis client入门，深入全面可查阅[为什么要用Redis](https://juejin.im/post/5b516dc75188251af363492d)
+
 ## 概述
 
 redis是基于`BSD协议`的，关于[各种协议的介绍](http://www.runoob.com/w3cnote/open-source-license.html)
@@ -5,6 +7,11 @@ redis是基于`BSD协议`的，关于[各种协议的介绍](http://www.runoob.c
 redis的操作是原子性的（要么完全成功、要么完全失败）
 
 redis支持五种数据类型：string（字符串），hash（哈希），list（列表），set（集合）及zset(sorted set：有序集合)。
+
+为什么要用Redis?
+
+![](../images/redis/1539834829208.jpg)
+![](../images/redis/1539834852322.jpg)
 
 ## node_redis
 

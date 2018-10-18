@@ -29,3 +29,7 @@ client.hgetallAsync('key2').then(res => {
 client.existsAsync('key2').then(res => {
     console.log(res)
 })
+
+client.keysAsync('*').then(res => {
+    console.log(res)
+})
