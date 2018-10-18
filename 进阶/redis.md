@@ -10,8 +10,8 @@ redis支持五种数据类型：string（字符串），hash（哈希），list�
 
 为什么要用Redis?
 
-![](../images/redis/1539834829208.jpg)
-![](../images/redis/1539834852322.jpg)
+<img src="../images/redis/1539834829208.jpg" width="400px">
+<img src="../images/redis/1539834852322.jpg" width="400px">
 
 ## node_redis
 
