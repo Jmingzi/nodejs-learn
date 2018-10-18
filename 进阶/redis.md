@@ -61,9 +61,7 @@ client.onAsync('error').then(err => {
 - 对`set`的相关操作
 - 对`zset`的相关操作
 
-例如判断一个key是否存在
-
-原生的操作为
+例如判断一个key是否存在，原生的操作为
 ```
 EXISTS key
 ```
@@ -72,6 +70,34 @@ node_redis中
 client.exists('key', callback)
 // promisify后
 client.exists('key').then(console.log)
+```
+
+所有操作都会接受一个callback回调，和fs类似，第一个参数都是`error`，第二个参数是返回结果`reply`，都会有2种表示：
+
+回调
+```js
+client.set(key, value, (err, reply) => {})
+```
+Promise
+```js
+client.set(key, value).then(reply => {}).catch(err => {})
+```
+
+### string commands
+
+Redis 字符串数据类型的相关命令用于管理 redis 字符串值
+
+```js
+client.set(key, value)
+client.append(key, value) // key存在，追加value
+client.strlen(key)  // 获取长度
+client.getset(key, value)  // 设置key值，并且返回old value
+client.get(key)
+client.mget(key1, key2[, ...]) // 批量获取
+client.incr(key)    // 将key+1
+client.incrby(key, increment) // 将key+increment
+client.decr(key)    // 将key-1
+client.decrby(key, decrement)   // 将key-decrement
 ```
 
 ### hash commands
