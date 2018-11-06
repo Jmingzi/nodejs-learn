@@ -15,6 +15,7 @@ nodejs系统性的学习过程记录
 - [RESTful API的最佳实践](./基础概念/restful_api.md)
 - [观察者模式与发布订阅模式](./基础概念/design_patterns_1.md)
 - [curl工具](./基础概念/curl.md)
+- [套接字概念](./基础概念/socket.md)
 
 [核心模块](./基础模块)
 
