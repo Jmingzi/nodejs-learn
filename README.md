@@ -27,7 +27,7 @@ nodejs系统性的学习过程记录
 - [child_process子进程](./基础模块/child_process.md)
 - [assert断言](./基础模块/assert.md)
 - [events事件](./基础模块/events.md)
-- [net网络](./基础模块/net.md)(进行中)
+- [net网络](./基础模块/net.md)
 - [cluster集群](./基础模块/net.md)(进行中)
 - [util工具](./基础模块/util.md)(进行中)
 
