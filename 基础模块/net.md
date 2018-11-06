@@ -52,3 +52,7 @@ client.on('connect', () => {
 })
 ```
 
+`net.createServer`是`net.Server`的别名，`net.createConnection`是`net.Socket`的别名
+
+
+
