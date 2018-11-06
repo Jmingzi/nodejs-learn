@@ -14,6 +14,7 @@ nodejs系统性的学习过程记录
 - [文件描述符](./基础模块/fd.md)
 - [RESTful API的最佳实践](./基础概念/restful_api.md)
 - [观察者模式与发布订阅模式](./基础概念/design_patterns_1.md)
+- [curl工具](./基础概念/curl.md)
 
 [核心模块](./基础模块)
 
