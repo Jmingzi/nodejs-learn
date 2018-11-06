@@ -39,8 +39,41 @@ curl -i iming.work
 curl -I iming.work
 ```
 
+添加cookie
 
+```
+curl --cookie name=ym iming.work
 
+# 保存网页的cookie到文件
+curl -c cookies.txt iming.work
 
+# 以文件为cookie
+curl -b cookie.txt iming.work
+```
 
+指明来源
+
+```
+curl --referer baidu.com iming.work
+curl -e baidu.com iming.work
+```
+
+发送表单信息
+
+```
+# get
+curl iming.work?name=ym
+
+# post
+curl -X POST --data-urlencode "name=ym" iming.work
+
+# 设置头部信息
+curl --header "Content-Type:application/json" iming.work
+```
+
+设置代理
+
+```
+curl -x 10.0.10.85:7074 -o index.html iming.work
+```
 
