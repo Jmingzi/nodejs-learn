@@ -44,7 +44,7 @@ reader.pipe(writer)
 
 上面的例子是管道将可读流与可写流对接起来了。为什么需要管道呢？这个问题应该是为什么需要流`stream`，可以回顾`stream`章节的知识点。
 
-查看node源码发现
+查看[node源码](https://github.com/nodejs/node/blob/master/lib/_stream_readable.js#L591)发现
 ```js
 Readable.prototype.pipe = function(dest, pipeOpts)
 ```
@@ -67,5 +67,9 @@ socket.pipe(socket)
 
 当缓冲区读空或者写满时，有一定的规则控制相应的读进程或者写进程进入等待队列，当空的缓冲区有新数据写入或者满的缓冲区有数据读出来时，就唤醒等待队列中的进程继续读写。
 
-~~~### 4. 消息(Message)队列~~~
+### ~~~4. 消息(Message)队列~~~
 
+以上参考
+
+- [进程间通信IPC (InterProcess Communication)](https://www.jianshu.com/p/c1015f5ffa74)
+- [stream pipe的原理及简化源码分析](https://juejin.im/post/5a75403ef265da4e7c185b3b)
