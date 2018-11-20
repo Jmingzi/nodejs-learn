@@ -28,7 +28,7 @@ nodejs系统性的学习过程记录
 - [assert断言](./基础模块/assert.md)
 - [events事件](./基础模块/events.md)
 - [net网络](./基础模块/net.md)
-- [cluster集群](./基础模块/net.md)(进行中)
+- [cluster集群](./基础模块/cluster.md)(进行中)
 - [util工具](./基础模块/util.md)(进行中)
 
 [进阶](./进阶)
