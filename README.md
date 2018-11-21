@@ -30,7 +30,7 @@ nodejs系统性的学习过程记录
 - [events事件](./基础模块/events.md)
 - [net网络](./基础模块/net.md)
 - [cluster集群](./基础模块/cluster.md)
-- [util工具](./基础模块/util.md)(进行中)
+- [util工具](./基础模块/util.md)
 - [domain域](./基础模块/domain.md)(进行中)
 - [dns域名服务器](./基础模块/dns.md)(进行中)
 - [crypto与https加密](./基础模块/crypto.md)(进行中)
