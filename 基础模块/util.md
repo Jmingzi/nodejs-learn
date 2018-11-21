@@ -58,3 +58,45 @@ const example = {
 console.log(util.inspect(example))
 // 会以字符串的形式输出 { name: 'ym', age: 18 }
 ```
+
+## util.deprecate
+
+将每个方法包装一层输出警告，警告的信息自定义，code为[废弃的 API 列表](http://nodejs.cn/api/deprecations.html#deprecations_list_of_deprecated_apis)
+
+```js
+const util = require('util')
+
+const a = util.deprecate(() => {
+  console.log('function self')
+}, '该方法即将被弃用', 'DEP0001')
+
+a()
+```
+
+## util.format
+
+返回一个格式化后的字符串
+
+- %s
+- %d
+- %i
+- %f
+- %j
+
+```js
+util.format('%s:%s', 'foo');
+// 返回: 'foo:%s'
+```
+
+## util.types
+提供一系列方法来验证某些类型，其中常用的有
+
+```js
+util.types.isAsyncFunction()
+util.types.isBooleanObject()
+util.types.isNumberObject()
+util.types.isStringObject()
+util.types.isDate()
+util.types.isPromise()
+util.types.isNativeError()
+```
