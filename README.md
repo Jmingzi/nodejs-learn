@@ -33,11 +33,11 @@ nodejs系统性的学习过程记录
 - [util工具](./基础模块/util.md)
 - [domain域](./基础模块/domain.md)(进行中)
 - [dns域名服务器](./基础模块/dns.md)(进行中)
-- [crypto与https加密](./基础模块/crypto.md)(进行中)
 
 [进阶](./进阶)
 
 - [redis及node_redis](./进阶/redis.md)
+- [https与非对称加密](./进阶/https.md)
 
 [项目实践](./项目实践)
 
