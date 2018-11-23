@@ -26,7 +26,10 @@
 
 去寻找这样2个质数相对来说比较简单，但是如果有人拆解这样一个大整数会更难。
 
-参考：[如何用通俗易懂的话来解释非对称加密?](https://www.zhihu.com/question/33645891)
+参考：
+
+- [如何用通俗易懂的话来解释非对称加密?](https://www.zhihu.com/question/33645891)
+- [非对称加密与HTTPS](https://zhuanlan.zhihu.com/p/37738632)
 
 ## ssl原理
 
