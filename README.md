@@ -31,13 +31,12 @@ nodejs系统性的学习过程记录
 - [net网络](./基础模块/net.md)
 - [cluster集群](./基础模块/cluster.md)
 - [util工具](./基础模块/util.md)
-- [domain域](./基础模块/domain.md)(进行中)
-- [dns域名服务器](./基础模块/dns.md)(进行中)
 
 [进阶](./进阶)
 
 - [redis及node_redis](./进阶/redis.md)
 - [https与非对称加密](./进阶/https.md)
+- [dns解析过程与劫持](./进阶/dns.md)(进行中)
 
 [项目实践](./项目实践)
 
