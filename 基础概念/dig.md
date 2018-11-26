@@ -50,3 +50,10 @@ dig ns iming.work
 # 查询A记录
 dig a iming.work
 ```
+
+参考
+
+- [dig](https://ftp.isc.org/isc/bind/9.11.0a1/doc/arm/man.dig.html)
+- [Linux命令：使用dig命令解析域名](https://blog.csdn.net/reyleon/article/details/12976889)
+- [dig 命令](https://www.ibm.com/support/knowledgecenter/zh/ssw_aix_72/com.ibm.aix.cmds2/dig.htm)
+- [Linux下的dig 命令详解](http://blog.51cto.com/41961/238942)
