@@ -72,12 +72,74 @@ iming.work.
 - [例解DNS递归/迭代名称解析原理](https://blog.csdn.net/lycb_gz/article/details/11720247)
 
 实例分析
+> 我们用dig工具来简要查看，而不是使用Wireshark。
 
 ```
 dig +trace iming.work
+
+; <<>> DiG 9.10.6 <<>> iming.work +trace
+;; global options: +cmd
+.			277528	IN	NS	e.root-servers.net.
+.			277528	IN	NS	h.root-servers.net.
+.			277528	IN	NS	d.root-servers.net.
+.			277528	IN	NS	k.root-servers.net.
+.			277528	IN	NS	b.root-servers.net.
+.			277528	IN	NS	m.root-servers.net.
+.			277528	IN	NS	f.root-servers.net.
+.			277528	IN	NS	j.root-servers.net.
+.			277528	IN	NS	l.root-servers.net.
+.			277528	IN	NS	i.root-servers.net.
+.			277528	IN	NS	c.root-servers.net.
+.			277528	IN	NS	g.root-servers.net.
+.			277528	IN	NS	a.root-servers.net.
+;; Received 503 bytes from 10.0.10.100#53(10.0.10.100) in 14 ms
+
+work.			172800	IN	NS	dns3.nic.work.
+work.			172800	IN	NS	dns2.nic.work.
+work.			172800	IN	NS	dnsd.nic.work.
+work.			172800	IN	NS	dnsc.nic.work.
+work.			172800	IN	NS	dnsb.nic.work.
+work.			172800	IN	NS	dnsa.nic.work.
+work.			172800	IN	NS	dns1.nic.work.
+work.			172800	IN	NS	dns4.nic.work.
+;; Received 798 bytes from 198.41.0.4#53(a.root-servers.net) in 203 ms
+
+iming.work.		172800	IN	NS	dns19.hichina.com.
+iming.work.		172800	IN	NS	dns20.hichina.com.
+;; Received 841 bytes from 103.49.81.35#53(dns2.nic.work) in 396 ms
+
+iming.work.		600	IN	A	116.62.70.156
+;; Received 55 bytes from 106.11.211.58#53(dns20.hichina.com) in 43 ms
 ```
 
+> 查询结果省略了部分。
 
+从上面的返回可以看出
 
+- 查询是分为4步的，且省略了本地dns服务器查询这一步骤
+- 查询到根域名服务器a-m
+- 每一级域名服务器的查询都是有TTL缓存时间的，根域名设置的277528s、其它是172800s，而A记录是我们自己设置的600s
 
+具体的流程：
+
+- 在电脑开机的时候，通过DHCP获取到本机IP和DNS等
+- 在请求`iming.work`域名时，先向本地DNS发起请求
+- 本地DNS向根域名服务器发起请求，返回所有该顶级域名`work.`的相关信息（ns及ip等）
+- 本地DNS向顶级域名服务器发起请求，返回`iming.work.`的相关信息
+- 本地DNS向权限服务器发起请求，根据你自己配置的A记录，返回ip地址
+- 本地DNS将ip地址返回给请求者
+
+可以看到，查询方式其实是先进行的递归，再迭代查询的。
+
+上面的NS记录，其实就是指定dns解析服务器地址，也类似
+
+```
+dig @8.8.8.8 iming.work
+```
+
+参考：
+
+- [关于DNS服务器的原理和配置](https://zhuanlan.zhihu.com/p/29791932)
+- [DNS 原理入门](http://www.ruanyifeng.com/blog/2016/06/dns.html)
+- [DNS与NS、NS记录](https://www.cnblogs.com/yingsong/p/4429637.html)
 
