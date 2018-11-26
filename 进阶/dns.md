@@ -74,7 +74,7 @@ iming.work.
 ## 实例分析
 > 我们用dig工具来简要查看，而不是使用Wireshark。
 
-```
+```sh
 dig +trace iming.work
 
 ; <<>> DiG 9.10.6 <<>> iming.work +trace
