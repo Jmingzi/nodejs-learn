@@ -1,4 +1,4 @@
-## Express中间件
+## Express中间件及源码分析
 
 ### 概念
 
@@ -183,3 +183,6 @@ self.process_params(() => {
   }
 })
 ```
+
+参考
+- [Express源码学习-路由篇](https://segmentfault.com/a/1190000013953688)
