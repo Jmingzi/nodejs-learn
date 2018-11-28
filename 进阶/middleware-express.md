@@ -85,3 +85,101 @@ function createApplication() {
   return app;
 }
 ```
+紧接着来看`application.js`的内容，在程序的最后，我们以`app.listen(port)`来注册端口监听
+
+```js
+app.listen = function listen() {
+  // this即为app.handle的调用
+  var server = http.createServer(this);
+  return server.listen.apply(server, arguments);
+};
+```
+我们再来看`app.handle`
+
+```js
+app.handle = function handle(req, res, callback) {
+  // 初始化的时候，callback肯定是没有的
+  var router = this._router;
+
+  // 兜底的错误处理函数
+  var done = callback || finalhandler(req, res, {
+    env: this.get('env'),
+    onerror: logerror.bind(this)
+  });
+
+  // no routes
+  if (!router) {
+    debug('no routes defined on app');
+    done();
+    return;
+  }
+
+  // 最终的调用都指向了router.handle
+  // 和app.use类似，最终都是router.use
+  router.handle(req, res, done);
+};
+```
+
+我们再来看`app.use`
+
+```js
+  fns.forEach(function (fn) {
+    // non-express app
+    if (!fn || !fn.handle || !fn.set) {
+      // 第三方的中间件都是调用的router.use
+      return router.use(path, fn);
+    }
+
+    // mounted an app
+    fn.emit('mount', this);
+  }, this);
+```
+
+最后我们再来看`router.use`和`router.handle`，都是通过`Layer`将`path`和回调`fn`管理在`this.stack`的数组中。
+
+也就是说路由route和中间件一样都是通过`Layer`来处理。route的fn为`dispatch`，而中间件的fn为自定义的回调。
+
+那在`router.handle`时如何区分时路由还是中间件？通过`layer.route`，我们可以看到在`new Layer`时二者的区别
+
+```js
+proto.route = function route(path) {
+  var route = new Route(path);
+
+  var layer = new Layer(path, {
+    sensitive: this.caseSensitive,
+    strict: this.strict,
+    end: true
+  }, route.dispatch.bind(route));
+
+  // 将route赋值为本身
+  layer.route = route;
+
+  this.stack.push(layer);
+  return route;
+};
+
+proto.use = function use(fn) {
+    var layer = new Layer(path, {
+      sensitive: this.caseSensitive,
+      strict: false,
+      end: false
+    }, fn);
+
+    // 将route置为undefined
+    layer.route = undefined;
+}
+```
+
+最终的路由和中间件处理都在`router.handle`中，在整个Router路由系统中stack 存放着一个个layer, 通过layer.route 指向route路由对象, route的stack的里存放的也是一个个layer，每个layer中包含(method/handler)。
+
+![](../images/express1.png)
+
+```js
+// 缓存查询
+self.process_params(() => {
+  // 如果route存在，这处理请求的handle，进一步处理route.stack
+  if (route) {
+    return layer.handle_request(req, res, next);
+  }
+})
+```
