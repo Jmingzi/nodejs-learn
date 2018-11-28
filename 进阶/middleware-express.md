@@ -54,3 +54,34 @@ Express 中唯一内置的中间件函数是 `express.static()`
 例如`body-parser`等
 
 ### 源码分析
+
+入口处express为一个构造函数，将app挂载`application`原型后，返回一个函数给`http.createServer`作为回调监听`IncomingMessage`
+
+```js
+function createApplication() {
+  // 回调监听
+  var app = function(req, res, next) {
+    // 触发已注册的中间件
+    app.handle(req, res, next);
+  };
+
+  // 继承EventEmitter
+  mixin(app, EventEmitter.prototype, false);
+  // 继承application
+  mixin(app, proto, false);
+
+  // 改写IncomingMessage实例变为可写并循环引用
+  app.request = Object.create(req, {
+    app: { configurable: true, enumerable: true, writable: true, value: app }
+  })
+
+  // 改写ServerResponse实例变为可写并循环引用
+  app.response = Object.create(res, {
+    app: { configurable: true, enumerable: true, writable: true, value: app }
+  })
+
+  // 初始化application
+  app.init();
+  return app;
+}
+```
