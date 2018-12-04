@@ -235,7 +235,7 @@ transform.end();
 
 关于`_flush`，查看源码可以发现，通过`prefinish`事件触发，也就是说我们可以手动`emit('prefinish')`，来触发`_flush`
 
-```
+```js
 flush(callback) {
   // 正常时error为null
   // data为你额外需要写入流的数据
