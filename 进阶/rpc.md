@@ -1,6 +1,4 @@
-## rpc
-
-> 拓展知识：[soa](https://zh.wikipedia.org/wiki/%E9%9D%A2%E5%90%91%E6%9C%8D%E5%8A%A1%E7%9A%84%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84)、[Zookeeper的功能以及工作原理](http://www.cnblogs.com/felixzh/p/5869212.html)、[zookeeper-study](https://github.com/wacxt/zookeeper-study)
+## 概念
 
 使用rpc有2种场景
 
@@ -16,7 +14,7 @@
 
 参考：[谁能用通俗的语言解释一下什么是 RPC 框架？](https://www.zhihu.com/question/25536695)
 
-## rpc 原理
+## 原理
 
 ![](../images/rpc.png)
 
@@ -35,3 +33,5 @@
 - 数据包的接收处理，何时才知道响应包发送完成？socket本身就拥有stream的特性，我们可以利用`data`或`readable`事件来处理，甚至可以利用socket的双工流特性重写转换
 
 了解完上述之后再来看这篇文章就清晰很多了：[聊聊 Node.js RPC（一）— 协议](https://www.yuque.com/egg/nodejs/dklip5)
+
+> 拓展知识：[soa](https://zh.wikipedia.org/wiki/%E9%9D%A2%E5%90%91%E6%9C%8D%E5%8A%A1%E7%9A%84%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84)、[Zookeeper的功能以及工作原理](http://www.cnblogs.com/felixzh/p/5869212.html)、[zookeeper-study](https://github.com/wacxt/zookeeper-study)
