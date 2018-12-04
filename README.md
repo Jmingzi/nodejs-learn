@@ -25,6 +25,7 @@ nodejs系统性的学习过程记录
 - [fs文件模块](https://iming.work/detail/5b74dc74808ca40064dcbb79)
 - [http](https://iming.work/detail/5b6f9a2f808ca4003c100db2)
 - [Stream流](./基础模块/stream.md)
+- [理解stream](./基础模块/stream2.md)
 - [Process进程](./基础模块/process.md)
 - [child_process子进程](./基础模块/child_process.md)
 - [assert断言](./基础模块/assert.md)
@@ -32,6 +33,7 @@ nodejs系统性的学习过程记录
 - [net网络](./基础模块/net.md)
 - [cluster集群](./基础模块/cluster.md)
 - [util工具](./基础模块/util.md)
+- [buffer](./基础模块/buffer.md)
 
 [进阶](./进阶)
 
