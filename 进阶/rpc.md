@@ -35,3 +35,8 @@
 了解完上述之后再来看这篇文章就清晰很多了：[聊聊 Node.js RPC（一）— 协议](https://www.yuque.com/egg/nodejs/dklip5)，关于buffer：[buffer概念](../基础模块/buffer.md)
 
 > 拓展知识：[soa](https://zh.wikipedia.org/wiki/%E9%9D%A2%E5%90%91%E6%9C%8D%E5%8A%A1%E7%9A%84%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84)、[Zookeeper的功能以及工作原理](http://www.cnblogs.com/felixzh/p/5869212.html)、[zookeeper-study](https://github.com/wacxt/zookeeper-study)
+
+参考
+
+- [聊聊 Node.js RPC（一）— 协议](https://www.yuque.com/egg/nodejs/dklip5)
+- [RPC(远程过程调用)的实现原理](https://blog.cnbang.net/tech/1966/)
