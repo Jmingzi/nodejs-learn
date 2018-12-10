@@ -44,6 +44,7 @@ nodejs系统性的学习过程记录
     - [express中间件及源码分析](./进阶/middleware-express.md)
     - [koa中间件及源码分析](./进阶/middleware-koa.md)(进行中)
 - [node服务构成](./进阶/monitor.md)(进行中)
+- [graphql入门](./进阶/graphql.md)(进行中)
 - [node rpc原理及构成](./进阶/rpc.md)
     - [动手实现rpc](https://github.com/Jmingzi/rpc-demo)
     - [关于rpc的深刻感想](https://github.com/Jmingzi/rpc-demo/blob/master/README.md#%E4%B8%BA%E4%BB%80%E4%B9%88%E8%A6%81%E7%94%A8rpc%E8%80%8C%E4%B8%8D%E6%98%AF%E4%BD%BF%E7%94%A8http)
