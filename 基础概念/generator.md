@@ -48,3 +48,7 @@ result.next()
 // {value: 1, done: false}
 ```
 
+参考
+
+- [Generator 函数的语法](http://es6.ruanyifeng.com/#docs/generator)
+- [迭代器和生成器](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Guide/Iterators_and_Generators)
