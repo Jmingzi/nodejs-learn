@@ -19,7 +19,7 @@ nodejs系统性的学习过程记录
 - [IPC概念](./基础概念/ipc.md)
 - [分布式与集群](./基础概念/集群.md)
 - [dns查询工具dig](./基础概念/dig.md)
-- [generator](./基础概念/generator.md)(进行中)
+- [generator生成器](./基础概念/generator.md)(进行中)
 
 [核心模块](./基础模块)
 
