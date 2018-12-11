@@ -1,8 +1,16 @@
 使用koa作为node中间件服务
 
+查询用redis做缓存
+
 ## API
 
 ```js
+/**
+ * 权限、账户等
+ */
+
+db.init()
+
 /**
  * 创建表
  */
@@ -10,15 +18,10 @@
 db.createTable(tableName)
 
 /**
- * 插入数据
+ * 新增或更新数据
  */
 
 db.set(key, value)
-
-/**
- * 保存数据
- */
-
 db.save(data)
 
 /**
@@ -35,7 +38,6 @@ db.equal('type', 1)
 db.asc()
 db.limit(0, 10)
 db.find()
-```
 
 /**
  * 删除数据
